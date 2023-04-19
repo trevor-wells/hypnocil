@@ -76,6 +76,9 @@ table {
     width:60%;
 }
 
+td {
+    text-align: center;
+}
 .content {
     display:flex;
     gap:3em;
