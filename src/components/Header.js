@@ -11,6 +11,7 @@ export default function Header({search, setSearch}) {
             <div>
                 <img
                     src="./images/hypnocil-logo.png"
+                    alt="hypnocil logo"
                 />
                 <h1>Clinical Trials</h1>
             </div>

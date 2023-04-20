@@ -1,36 +1,68 @@
 import React, {useState} from "react"
-import (v4 as uuid) from "uuid"
 
 export default function NewPatientForm({setPatients}) {
 
     const [formData, setFormData] = useState({
-        id: uuid(),
         name: "",
-        sideEffects: ""
+        side_effects: ""
     })
+
+    function handleChange(event){
+        const {name, value} = event.target
+
+        setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            })
+        )
+    }
+
+    console.log(formData)
+
+    function handleSubmit(event){
+        event.preventDefault()
+
+        fetch("http://localhost:3000/patients" , {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => setPatients(prevPatients => (
+            [
+                ...prevPatients,
+                data
+            ]
+        )))
+    }
+
     return(
         <>
-            <form id="new-patient-form">
+            <form
+                id="new-patient-form"
+                onSubmit={handleSubmit}
+            >
                 <input
                     id="patient-name"
                     type="text"
                     placeholder="Patient Name"
+                    name="name"
                     value={formData.name}
                     onChange={handleChange}
                 />
                 <select
-                    name="sideEffects"
+                    name="side_effects"
                     id="side-effects"
                     form="new-patient-form"
-                    value={formData.sideEffects}
+                    value={formData.side_effects}
                     onChange={handleChange}
                 >
-                    <option value="dizziness">Dizziness</option>
-                    <option value="nausea">Nausea</option>
-                    <option value="somnambulism">Somnambulism</option>
-                    <option value="memory">Memory</option>
-                    <option value="allergy">Severe Allergic Reaction</option>
-                    <option value="headache">Headache</option>
+                    <option value="Dizziness">Dizziness</option>
+                    <option value="Nausea">Nausea</option>
+                    <option value="Somnambulism">Somnambulism</option>
+                    <option value="Loss of Memory">Loss of Memory</option>
+                    <option value="Severe Allergic Reaction">Severe Allergic Reaction</option>
+                    <option value="Headache">Headache</option>
                 </select>
                 <input
                     type="submit"

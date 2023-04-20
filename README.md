@@ -40,7 +40,7 @@ As a user, I should be able to:
 
 - Create a way to add a side effect to each patient. These should persist in the backend.
 - Create a way to mark a patient 'deceased'. This should persist in the backend.
-- Create a way to add multuple side effects when creating a new patient.
+- Create a way to add multiple side effects when creating a new patient.
 
 ### Example Response:
 
